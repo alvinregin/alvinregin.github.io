@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,24 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Alvin Regin | Portfolio</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f4f6f8;
+      --text: #2c3e50;
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0, 0, 0, 0.08);
+      --link: #3498db;
+    }
+
+    body.dark {
+      --bg: #1c1f26;
+      --text: #ecf0f1;
+      --card-bg: #2b2f36;
+      --card-shadow: rgba(0, 0, 0, 0.5);
+      --link: #74b9ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f4f6f8;
-      color: #2c3e50;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       padding: 40px;
+      transition: all 0.3s ease;
     }
+
     header {
       text-align: center;
       margin-bottom: 50px;
     }
+
     header h1 {
       font-size: 2.5rem;
     }
+
     header p {
       font-size: 1.1rem;
-      color: #7f8c8d;
+      color: var(--text);
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 8px 14px;
+      border: none;
+      background: var(--card-bg);
+      color: var(--text);
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px var(--card-shadow);
+      transition: background 0.3s ease;
     }
 
     .projects {
@@ -34,9 +72,9 @@
     }
 
     .card {
-      background: white;
+      background: var(--card-bg);
       border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 14px var(--card-shadow);
       padding: 20px;
       max-width: 300px;
       transition: transform 0.2s, box-shadow 0.2s;
@@ -44,16 +82,15 @@
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      box-shadow: 0 8px 24px var(--card-shadow);
     }
 
     .card h3 {
-      color: #34495e;
       margin-bottom: 10px;
     }
 
     .card a {
-      color: #3498db;
+      color: var(--link);
       text-decoration: none;
       font-weight: bold;
     }
@@ -65,12 +102,13 @@
     }
 
     .contact a {
-      color: #3498db;
+      color: var(--link);
       text-decoration: none;
     }
   </style>
 </head>
 <body>
+  <button class="toggle-btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
 
   <header>
     <h1>👋 Hey, I'm Alvin Regin</h1>
@@ -82,26 +120,35 @@
     <div class="projects">
       <div class="card">
         <h3>SmartC Attendance</h3>
-        <p>Face recognition-based student attendance system using Python + Streamlit.</p>
-        <a href="https://github.com/alvinregin/SmartC-Streamlit">View on GitHub →</a>
+        <p>Face recognition-based student attendance system using Python, dlib, and Streamlit. Includes image uploads, recognition, and CSV export.</p>
+        <a href="https://github.com/alvinregin/SmartC-Streamlit" target="_blank">View on GitHub →</a>
       </div>
-      <div class="card">
-        <h3>Stock Tracker</h3>
-        <p>Visualizes monthly investments, fees, returns and goals using pandas.</p>
-        <a href="#">View on GitHub →</a>
-      </div>
+
       <div class="card">
         <h3>Face Auth App</h3>
-        <p>Login interface that authenticates users with webcam + face recognition.</p>
-        <a href="https://github.com/alvinregin/Face-Recognition-App">View on GitHub →</a>
+        <p>Web-based facial login system using webcam + `face_recognition`. Authenticates users locally with Streamlit + OpenCV.</p>
+        <a href="https://github.com/alvinregin/Face-Recognition-App" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="card">
+        <h3>dlib-wheels</h3>
+        <p>Custom-built `dlib` Python 3.12 wheels for Windows. Helps others avoid build errors when installing `face_recognition` dependencies.</p>
+        <a href="https://github.com/alvinregin/dlib-wheels" target="_blank">View on GitHub →</a>
       </div>
     </div>
   </section>
 
   <footer class="contact">
-    <p>📫 Reach me at <a href="mailto:alvinregin2017@gmail.com">alvinregin2017@gmail.com</a> | 
-    <a href="https://github.com/alvinregin">GitHub</a></p>
+    <p>📫 Reach me at <a href="mailto:alvinregin2017@gmail.com">alvinregin2017@gmail.com</a> |
+    <a href="https://github.com/alvinregin" target="_blank">GitHub</a></p>
   </footer>
 
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+      const btn = document.querySelector('.toggle-btn');
+      btn.textContent = document.body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
+    }
+  </script>
 </body>
 </html>
